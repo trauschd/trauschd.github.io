@@ -1,8 +1,8 @@
 <html>
     <head>
         <title>Wheel of Misfortune</title>
-        <script type="text/javascript" src="javascript/Winwheel.min.js"></script>
-        <script type="text/javascript" src="javascript/TweenMax.min.js"></script>
+        <script type="text/javascript" src="../javascript/Winwheel.min.js"></script>
+        <script type="text/javascript" src="../javascript/TweenMax.min.js"></script>
     </head>
     <body>
         <div align="center">
@@ -21,43 +21,48 @@
 
         <script type="text/javascript">
             let colors = ['#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d', '#ee1c24', '#3cb878', '#f26522', '#a186be', '#fff200', '#00aef0', '#ee1c24', '#f6989d', '#f26522', '#3cb878', '#a186be', '#fff200', '#00aef0'];
-            let names = shuffledNames();
+            let names = ['Ren', 'Ren', 'Ren', 'Ren', 'Ren', 'Ren', 'Ren', 'Ren', 'Ren', 'Ren', 'Ren', 'Ren', 'Ren', 'Ren'];
+            let shuffled = shuffledNames(names);
             
-            let misfortune = new Winwheel({
-                "outerRadius": 212,
-                "innerRadius": 75,
-                "textFontSize": 18,
-                "textOrientation": "vertical",
-                "textAlignment": "outer",
-                "numSegments": names.length,
-                "segments": generateWheelSegments(),
-                "animation": {
-                    "type": "spinToStop",
-                    "duration": 7,
-                    "spins": 6,
-                    "callbackFinished": determineWinner
-                },
-                "pins": {
-                    "number": names.length,
-                    "fillStyle": "silver",
-                    "outerRadius": 4
-                }
-            });
+            let misfortune = generateWheel(shuffled)
 
             let isSpinning = false;
+            document.getElementById("names").value = names.join(", ")
 
-            function generateWheelSegments() {
+            function generateWheel(names) {
+                return new Winwheel({
+                    "outerRadius": 212,
+                    "innerRadius": 75,
+                    "textFontSize": 18,
+                    "textOrientation": "vertical",
+                    "textAlignment": "outer",
+                    "numSegments": names.length,
+                    "segments": generateWheelSegments(names),
+                    "animation": {
+                        "type": "spinToStop",
+                        "duration": 7,
+                        "spins": 6,
+                        "callbackFinished": determineWinner
+                    },
+                    "pins": {
+                        "number": names.length,
+                        "fillStyle": "silver",
+                        "outerRadius": 4
+                    }
+                });
+            }
+
+            function generateWheelSegments(shuffled) {
                 let segments = []
                 
-                for(i = 0; i < names.length; i++) {
-                    segments.push({'fillStyle' : colors[i], 'text' : names[i]})
+                for(i = 0; i < shuffled.length; i++) {
+                    segments.push({'fillStyle' : colors[i], 'text' : shuffled[i]})
                 }
 
                 return segments
             }
 
-            function shuffledNames() {
-                let array = ['Tyler', 'Ren', 'Paul', 'Adam', 'Adrian', 'Carson', 'Dennis', 'Ed', 'Hardik', 'Kathryn', 'Kelsey', 'Patrick', 'Ryan', 'Sergiu']
+            function shuffledNames(array) {
                 let currentIndex = array.length,  randomIndex;
 
                 // While there remain elements to shuffle...
