@@ -22,15 +22,22 @@
             <div>
                 <label>Names: </label>
                 &nbsp
-                <textarea id="names"></textarea>
-                <br/><br/>
+                <textarea id="names" style="height: 100px; width: 300px;"></textarea>
+                &nbsp
                 <button href="#" onclick="updateNames()">Update</button>
+            </div>
+            <br/>
+            <br/>
+            <div>
+               <button href="#" onclick="updateNamesAllocations()">Allocations</button>
+               <button href="#" onclick="updateNamesReporting()">Reporting</button>
+               <button href="#" onclick="updateNamesMonolith()">Monolith</button> 
             </div>
         </div>
 
         <script type="text/javascript">
             let colors = ['#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d', '#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200','#ee1c24', '#f6989d', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d','#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d'];
-            let names = ['Tyler', 'Ren', 'Paul', 'Adam', 'Adrian', 'Carson', 'Dennis', 'Ed', 'Hardik', 'Kathryn', 'Kelsey', 'Patrick S', 'Ryan', 'Sergiu', 'Ben', 'Patrick C', 'Jakki'];
+            let names = ['Ren', 'Adrian', 'Carson', 'Ed', 'Hardik', 'Kelsey', 'Patrick', 'Ryan H', 'Ryan K', 'Sergiu', 'Jakki', 'Jonathan', 'Mark', 'Caleb', 'Joe', 'Sharan', 'Matt', 'James'];
             let shuffled = shuffledNames(names);
             
             let misfortune = generateWheel(shuffled)
@@ -106,6 +113,28 @@
 
             function updateNames() {
                 names = document.getElementById("names").value.split(",").map(ele => ele.trim());
+                updateWheelWithNames(names);
+            }
+
+            function updateNamesAllocations() {
+                names = ['Ryan', 'Matt', 'Kelsey', 'Jakki', 'Mark', 'Caleb'];
+                document.getElementById("names").value = names.join(", ");
+                updateWheelWithNames(names);
+            }
+
+            function updateNamesReporting() {
+                names = ['James', 'Sergiu', 'Ed', 'Ryan', 'Joe', 'Patrick'];
+                document.getElementById("names").value = names.join(", ");
+                updateWheelWithNames(names);
+            }
+
+            function updateNamesMonolith() {
+                names = ['Ren', 'Adrian', 'Sharan', 'Jonathan', 'Hardik', 'Carson'];
+                document.getElementById("names").value = names.join(", ");
+                updateWheelWithNames(names);
+            }
+
+            function updateWheelWithNames(names) {
                 shuffled = shuffledNames(names);
                 isSpinning = false;
                 misfortune.stopAnimation(false);
@@ -114,3 +143,4 @@
             }
         </script>
     </body>
+</html>
