@@ -31,13 +31,13 @@
             <div>
                <button href="#" onclick="updateNamesAllocations()">Allocations</button>
                <button href="#" onclick="updateNamesReporting()">Reporting</button>
-               <button href="#" onclick="updateNamesMonolith()">Monolith</button> 
+               <button href="#" onclick="updateAutoRetailLending()">Auto Retail Lending</button> 
             </div>
         </div>
 
         <script type="text/javascript">
             let colors = ['#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d', '#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200','#ee1c24', '#f6989d', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d','#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d'];
-            let names = ['Ren', 'Adrian', 'Carson', 'Ed', 'Hardik', 'Kelsey', 'Patrick', 'Ryan H', 'Ryan K', 'Sergiu', 'Jakki', 'Jonathan', 'Mark', 'Caleb', 'Joe', 'Sharan', 'Matt', 'James'];
+            let names = ['Tyler', 'Chris', 'Nick', 'Jimmy', 'Renato', 'Tim', 'Johan', 'Ria', 'Prerna', 'Matt'];
             let shuffled = shuffledNames(names);
             
             let misfortune = generateWheel(shuffled)
@@ -123,13 +123,13 @@
             }
 
             function updateNamesReporting() {
-                names = ['James', 'Sergiu', 'Ed', 'Ryan', 'Joe', 'Patrick'];
+                names = ['James', 'Sergiu', 'Ed', 'Ryan', 'Joe', 'Patrick', 'Daniel'];
                 document.getElementById("names").value = names.join(", ");
                 updateWheelWithNames(names);
             }
 
-            function updateNamesMonolith() {
-                names = ['Ren', 'Adrian', 'Sharan', 'Jonathan', 'Hardik', 'Carson'];
+            function updateAutoRetailLending() {
+                names = ['Tyler', 'Chris', 'Nick', 'Jimmy', 'Renato', 'Tim', 'Johan', 'Ria', 'Prerna', 'Matt'];
                 document.getElementById("names").value = names.join(", ");
                 updateWheelWithNames(names);
             }
