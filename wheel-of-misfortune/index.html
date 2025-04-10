@@ -29,15 +29,13 @@
             <br/>
             <br/>
             <div>
-               <button href="#" onclick="updateNamesAllocations()">Allocations</button>
-               <button href="#" onclick="updateNamesReporting()">Reporting</button>
                <button href="#" onclick="updateAutoRetailLending()">Auto Retail Lending</button> 
             </div>
         </div>
 
         <script type="text/javascript">
             let colors = ['#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d', '#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200','#ee1c24', '#f6989d', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d','#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d'];
-            let names = ['Tyler', 'Chris', 'Nick', 'Jimmy', 'Renato', 'Tim', 'Johan', 'Ria', 'Prerna', 'Matt'];
+            let names = ['Tyler', 'Chris', 'Nick', 'Jimmy', 'Renato', 'Tim', 'Johan', 'Ria', 'Prerna', 'Matt', 'Sheriff'];
             let shuffled = shuffledNames(names);
             
             let misfortune = generateWheel(shuffled)
@@ -116,20 +114,8 @@
                 updateWheelWithNames(names);
             }
 
-            function updateNamesAllocations() {
-                names = ['Ryan', 'Matt', 'Kelsey', 'Jakki', 'Mark', 'Caleb'];
-                document.getElementById("names").value = names.join(", ");
-                updateWheelWithNames(names);
-            }
-
-            function updateNamesReporting() {
-                names = ['James', 'Sergiu', 'Ed', 'Ryan', 'Joe', 'Patrick', 'Daniel'];
-                document.getElementById("names").value = names.join(", ");
-                updateWheelWithNames(names);
-            }
-
             function updateAutoRetailLending() {
-                names = ['Tyler', 'Chris', 'Nick', 'Jimmy', 'Renato', 'Tim', 'Johan', 'Ria', 'Prerna', 'Matt'];
+                names = ['Tyler', 'Chris', 'Nick', 'Jimmy', 'Renato', 'Tim', 'Johan', 'Ria', 'Prerna', 'Matt', 'Sheriff'];
                 document.getElementById("names").value = names.join(", ");
                 updateWheelWithNames(names);
             }
