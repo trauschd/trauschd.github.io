@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
     <head>
         <title>Wheel of Misfortune</title>
         <script type="text/javascript" src="javascript/Winwheel.min.js"></script>
@@ -15,7 +15,7 @@
             </div>
             <br/>
             <div>
-                <button href="#" onclick="spin();">Spin</button>
+                <button id="spin-button" href="#" onclick="spin();">Spin</button>
             </div>
             <br/>
             <br/>
@@ -29,75 +29,78 @@
             <br/>
             <br/>
             <div>
-               <button href="#" onclick="updateAutoRetailLending()">Auto Retail Lending</button> 
+               <button href="#" onclick="updateAutoRetailLending()">Auto Retail Lending</button>
             </div>
         </div>
 
         <script type="text/javascript">
-            let colors = ['#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d', '#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200','#ee1c24', '#f6989d', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d','#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d'];
+            const colors = ['#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d', '#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200','#ee1c24', '#f6989d', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d','#ee1c24', '#3cb878', '#f6989d', '#00aef0', '#f26522', '#e70697', '#fff200', '#f6989d'];
             let names = ['Tyler', 'Chris', 'Nick', 'Jimmy', 'Renato', 'Tim', 'Johan', 'Ria', 'Prerna', 'Matt', 'Sheriff'];
             let shuffled = shuffledNames(names);
-            
-            let misfortune = generateWheel(shuffled)
+
+            let misfortune = generateWheel(shuffled);
 
             let isSpinning = false;
-            document.getElementById("names").value = names.join(", ")
+            document.getElementById("names").value = names.join(", ");
+
+            function setSpinButtonEnabled(enabled) {
+                document.getElementById("spin-button").disabled = !enabled;
+            }
 
             function generateWheel(names) {
                 return new Winwheel({
-                    "outerRadius": 212,
-                    "innerRadius": 75,
-                    "textFontSize": 16,
-                    "textOrientation": "vertical",
-                    "textAlignment": "outer",
-                    "numSegments": names.length,
-                    "segments": generateWheelSegments(names),
-                    "animation": {
-                        "type": "spinToStop",
-                        "duration": 7,
-                        "spins": 6,
-                        "callbackFinished": determineWinner
-                    },
-                    "pins": {
-                        "number": names.length,
-                        "fillStyle": "silver",
-                        "outerRadius": 4
-                    }
+                  animation: {
+                    callbackFinished: determineWinner,
+                    duration: 7,
+                    spins: 6,
+                    type: "spinToStop",
+                  },
+                  innerRadius: 75,
+                  numSegments: names.length,
+                  outerRadius: 212,
+                  pins: {
+                    fillStyle: "silver",
+                    number: names.length,
+                    outerRadius: 4,
+                  },
+                  segments: generateWheelSegments(names),
+                  textAlignment: "outer",
+                  textFontSize: 16,
+                  textOrientation: "vertical",
                 });
             }
 
             function generateWheelSegments(shuffled) {
-                let segments = []
-                
-                for(i = 0; i < shuffled.length; i++) {
-                    segments.push({'fillStyle' : colors[i], 'text' : shuffled[i]})
-                }
-
-                return segments
+              return shuffled.map((name, i) => ({
+                fillStyle: colors[i],
+                text: name,
+              }));
             }
 
             function shuffledNames(array) {
-                let currentIndex = array.length,  randomIndex;
+                let currentIndex = array.length, randomIndex;
 
                 // While there remain elements to shuffle...
-                while (currentIndex != 0) {
+                while (currentIndex !== 0) {
                   // Pick a remaining element...
                   randomIndex = Math.floor(Math.random() * currentIndex);
-                  currentIndex--;  
+                  currentIndex--;
 
                   // And swap it with the current element.
                   [array[currentIndex], array[randomIndex]] = [
-                    array[randomIndex], array[currentIndex]];
-                }  
+                    array[randomIndex], array[currentIndex],
+                  ];
+                }
 
                 return array;
             }
 
             function spin() {
-                if(isSpinning === true) {
+                if (isSpinning === true) {
                     return;
                 }
 
+                setSpinButtonEnabled(false);
                 document.getElementById("winner").innerHTML = "The Misfortunate: "
                 misfortune.rotationAngle = 0;
                 misfortune.startAnimation();
@@ -106,7 +109,8 @@
 
             function determineWinner(winningSegment) {
                 isSpinning = false;
-                document.getElementById("winner").innerHTML = "The Misfortunate: " + winningSegment.text
+                setSpinButtonEnabled(true);
+                document.getElementById("winner").innerHTML = `The Misfortunate: ${winningSegment.text}`;
             }
 
             function updateNames() {
@@ -123,6 +127,7 @@
             function updateWheelWithNames(names) {
                 shuffled = shuffledNames(names);
                 isSpinning = false;
+                setSpinButtonEnabled(true);
                 misfortune.stopAnimation(false);
                 misfortune = generateWheel(names)
                 misfortune.draw();
